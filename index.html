@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        #traffic-light {
+            width: 200px;
+            height: 700px;
+            background: url(img/tr.png) center / cover no-repeat;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            border-bottom: 2px #6c6868 solid;
+        }
+
+        #traffic-light #traffic-light-box {
+            width: 70px;
+            height: 210px;
+            margin-top: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #traffic-light-box div {
+            width: 60px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: #494949;
+        }
+
+        #traffic-light-box.red .lamp-r {
+            background-color: #f7716b;
+            box-shadow: 0 10px 45px 0 rgb(201 30 22);
+
+        }
+
+        #traffic-light-box.yellow .lamp-y {
+            background-color: #fadb58;
+            box-shadow: 0 10px 45px 0 rgb(255 206 0);
+
+        }
+
+        #traffic-light-box.red-yellow .lamp-r {
+            background-color: #f7716b;
+            box-shadow: 0 10px 45px 0 rgb(201 30 22);
+        }
+
+        #traffic-light-box.red-yellow .lamp-y {
+            background-color: #fadb58;
+            box-shadow: 0 10px 45px 0 rgb(255 206 0);
+        }
+
+        #traffic-light-box.green .lamp-g {
+            background-color: #2db673;
+            box-shadow: 0 10px 45px 0 rgb(115 211 145);
+
+        }
+
+        .traffic-light-button {
+            width: 50px;
+            height: 65px;
+            background-color: #ffcb00;
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            top: 150px;
+            border-radius: 5px;
+            font-size: 9px;
+            text-align: center;
+            padding-top: 8px;
+            color: #be4c4c;
+            text-transform: uppercase;
+            box-shadow: 0 1px 2px 0 rgb(164 140 140 / 25%);
+            cursor: pointer;
+        }
+
+        .traffic-light-button #next {
+            width: 20px;
+            height: 20px;
+            background-color: #9e9e9e;
+            border: none;
+            border-radius: 50%;
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            top: 20px;
+            border: 2px #ee5c5c solid;
+            cursor: pointer;
+            transition-duration: .25s;
+        }
+
+        .traffic-light-button #next:active {
+            transform: scale(1.2, 1.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="traffic-light">
+        <div id="traffic-light-box" class="red">
+            <div class="lamp-r"></div>
+            <div class="lamp-y"></div>
+            <div class="lamp-g"></div>
+        </div>
+        <div class="traffic-light-button">Нажмите
+            <button id="next"></button>
+        </div>
+    </div>
+
+
+    <script>
+        const states = ['red', 'red-yellow', 'green', 'yellow'];
+        let currentStateIndex = 0;
+
+        document.querySelector(".traffic-light-button, #next").addEventListener("click", () => {
+            const trafficLight = document.querySelector("#traffic-light-box");
+
+            trafficLight.classList.remove(states[currentStateIndex]);
+            currentStateIndex = (currentStateIndex + 1) % states.length;
+            trafficLight.classList.add(states[currentStateIndex]);
+        });
+
+    </script>
+</body>
+
+</html>
